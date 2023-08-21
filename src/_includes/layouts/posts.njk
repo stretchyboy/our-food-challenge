@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+
+{# This is the template for the Posts page–it lists the posts in the collection #}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/css/jsvectormap.css" integrity="sha512-R/p6hEdcHJdQ5967L0K8A4wO2xyg5SDgFrESWemL+GhQR5EIJ2fsNEnvzEKgr2MCRNgNEJwVQIKDQ68cThxQpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/js/jsvectormap.min.js" integrity="sha512-qIjvxoJojZ64SLBuklyHGh7Bmc0CXhp0KhsDD19y8q935nh/KgHIpJbXcsoZlzzR2Wf78CpH34jiclEqzZ8quQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/maps/world.js" integrity="sha512-fzlKic/RyjgLIbkRywhW3cYwiI+XgcslngfOzC+p/2D5OBDvJQkp56pBRcfvj7Rd471B4UnweDMBGcPetMse1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+    
+<div id="map" style="width: 1200px; height: 700px"></div>
+    
+    
+  <script>  
+const map = new jsVectorMap({
+  selector: '#map',
+  map: 'world',
+  selectedRegions: ['{{iso}}'],
+    regionStyle: {
+    selected: { fill: 'red' },
+    selectedHover: { fill: 'purple' },
+      render(code) {
+        console.log("code", code);
+        return code
+      }
+    }                 
+})
+    </script>
+
+
+<div class="wrapper home">
+  <div class="content">
+    {{ content | safe }}
+    <ul>
+      {%- for post in collections.posts -%}
+        <li{% if page.url == post.url %} aria-current="page"{% endif %}>{{ post.data.page.date | htmlDateString }} — <a href='{{ post.url }}'>{{ post.data.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>

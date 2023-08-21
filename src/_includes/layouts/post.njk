@@ -1,0 +1,133 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/css/jsvectormap.css" integrity="sha512-R/p6hEdcHJdQ5967L0K8A4wO2xyg5SDgFrESWemL+GhQR5EIJ2fsNEnvzEKgr2MCRNgNEJwVQIKDQ68cThxQpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/js/jsvectormap.min.js" integrity="sha512-qIjvxoJojZ64SLBuklyHGh7Bmc0CXhp0KhsDD19y8q935nh/KgHIpJbXcsoZlzzR2Wf78CpH34jiclEqzZ8quQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/maps/world.js" integrity="sha512-fzlKic/RyjgLIbkRywhW3cYwiI+XgcslngfOzC+p/2D5OBDvJQkp56pBRcfvj7Rd471B4UnweDMBGcPetMse1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+{# This is the template for individual blog posts–it builds the front matter properties into the page #}
+
+<div class="wrapper post">
+  <div>
+    {# The post front matter includes the title property #}
+    <h1 class="postTitle">{{title}}</h1>
+    
+    <br /> 
+    
+    <img src="https://www.worldatlas.com/r/w425/img/flag/{{iso| lower}}-flag.jpg" height="200" />
+    <img src="https://www.worldometers.info/img/maps_c/{% if locator %}{{locator}}{% else %}{{iso}}{% endif %}-map.gif" height="200"/>
+    <img src="https://www.worldometers.info/img/maps_cl/{% if locator %}{{locator}}{% else %}{{iso}}{% endif %}-locator-map.gif" height="200"/>
+    
+    {# ADD P ELEMENT FROM TODO ON THE NEXT LINE #}
+    
+    <p>
+      <a target="_blank" href="https://en.wikipedia.org/wiki/{{title}}">Wikipedia</a>
+      <a target="_blank" href="https://www.google.com/search?q={{title}}+national+dish">National Dish</a>
+      <a target="_blank" href="https://www.tasteatlas.com/most-popular-dishes-in-{{title | lower | replace(' ', '-') }}">Most Popular</a>
+    </p>
+    
+    
+    {% if dishes %}
+    <h3>
+      Dishes we will cook
+    </h3>    
+    <ul>
+      {%- for dish in dishes -%}
+        <li>
+          <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
+      </li>
+      {%- endfor -%}
+    </ul>
+  
+    {% endif %}
+   {% if possibles %}
+    <h3>
+      Possible Dishes
+    </h3>
+    <ul>
+      
+      {%- for dish in possibles -%}
+        <li>{{dish}} - 
+          <a target="_blank" href="https://www.tasteatlas.com/{{dish | lower | replace(' ', '-') }}">Taste Atlas</a>
+          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dish | replace(' ', '+') }}+recipe">Google Recipe</a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {% endif %}
+    
+    {% if sweets %}
+    <h3>
+      Sweets we will cook
+    </h3>    
+    <ul>
+      {%- for dish in sweets -%}
+        <li>
+          <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    
+    {% endif %}
+    {% if possiblesweets %}
+    <h3>
+      Possible Sweet Dishes
+    </h3>
+    <ul>
+      
+      {%- for dish in possiblesweets -%}
+        <li>{{dish}} - 
+          <a target="_blank" href="https://www.tasteatlas.com/{{dish | lower | replace(' ', '-') }}">Taste Atlas</a>
+          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dish | replace(' ', '+') }}+recipe">Google Recipe</a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {% endif %}
+    
+    
+    {# Content from the body of the post markdown appears here #}
+    {{ content | safe }}
+    
+    <!--
+    
+<div id="map" style="width: 1200px; height: 700px"></div>
+    
+    
+  <script>  
+const map = new jsVectorMap({
+  selector: '#map',
+  map: 'world',
+  selectedRegions: ['{{iso}}'],
+    regionStyle: {
+    selected: { fill: 'red' },
+    selectedHover: { fill: 'purple' },
+      render(code) {
+        console.log("code", code);
+        return code
+      }
+    }                 
+})
+    </script>
+    -->
+    
+    <div class="controls">
+    {# The previous and next post data is added in .eleventy.js #}
+    {% if prevPost.url %}
+      <p>
+        <strong>Previous post</strong>: 
+        <a class="previous" href="{{ prevPost.url }}">{{ prevPost.data.title }}</a>
+      </p>
+    {% endif %}
+    {% if nextPost.url %}
+      <p>
+        <strong>Next post</strong>: 
+        <a class="next" href="{{ nextPost.url }}">{{ nextPost.data.title }}</a>
+      </p>
+    {% endif %}
+    </div>
+  </div>
+  
+  
+</div>
