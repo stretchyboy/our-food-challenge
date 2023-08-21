@@ -1,0 +1,87 @@
+---
+layout: layouts/base.njk
+templateClass: tmpl-home
+---
+
+{# The Home page uses this template–it extends the base template #}
+
+<div class="wrapper home">
+  <div class="content">
+    {{ content | safe }}
+    <table>
+      {%- for post in collections.posts -%}
+      <tr>
+        <th>
+          <a href="{{ post.url }}">
+            {{ post.data.title }}
+          </a>
+        </th>
+        <td>{% if post.data.date %}{{ post.data.date | htmlDateString }}{% else %} &nbsp; {% endif %}</td>
+        <td>   
+          <img src="https://www.worldatlas.com/r/w425/img/flag/{{post.data.iso| lower}}-flag.jpg" height="50" />
+        </td>
+        <td>
+         <img src="https://www.worldometers.info/img/maps_c/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-map.gif" height="50"/>
+        </td>
+        <td>
+         <img src="https://www.worldometers.info/img/maps_cl/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-locator-map.gif" height="50"/>
+        </td>
+     </tr> 
+     {%- endfor -%}
+    </table> 
+     
+<!--    
+    {# After the the content defined in index.md, list the blog posts in the collection #}
+    <ul>
+      {%- for post in collections.posts -%}
+        <li{% if page.url == post.url %} aria-current="page"{% endif %}>{{ post.data.page.date | htmlDateString }} — <a href='{{ post.url }}'>{{ post.data.title }}</a>
+          
+          <img src="https://www.worldatlas.com/r/w425/img/flag/{{post.data.iso| lower}}-flag.jpg" height="30" />
+          <img src="https://www.worldometers.info/img/maps_c/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-map.gif" height="30"/>
+          <img src="https://www.worldometers.info/img/maps_cl/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-locator-map.gif" height="30"/>
+    
+          </li>
+      {%- endfor -%}
+      <li><a href="/posts">View all posts</a></li>
+    </ul>
+  </div>
+-->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/css/jsvectormap.css" integrity="sha512-R/p6hEdcHJdQ5967L0K8A4wO2xyg5SDgFrESWemL+GhQR5EIJ2fsNEnvzEKgr2MCRNgNEJwVQIKDQ68cThxQpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/js/jsvectormap.min.js" integrity="sha512-qIjvxoJojZ64SLBuklyHGh7Bmc0CXhp0KhsDD19y8q935nh/KgHIpJbXcsoZlzzR2Wf78CpH34jiclEqzZ8quQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsvectormap/1.4.3/maps/world.js" integrity="sha512-fzlKic/RyjgLIbkRywhW3cYwiI+XgcslngfOzC+p/2D5OBDvJQkp56pBRcfvj7Rd471B4UnweDMBGcPetMse1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+    
+<div id="map" style="width: 1200px; height: 700px"></div>
+    
+    
+  <script>  
+const map = new jsVectorMap({
+  selector: '#map',
+  map: 'world',
+  selectedRegions: [
+    
+   {%- for post in collections.posts -%}
+      {% if post.data.iso %} "{{post.data.iso}}", {% endif %}
+  {%- endfor -%}  
+  
+  ],
+    regionStyle: {
+    selected: { fill: 'red' },
+    selectedHover: { fill: 'purple' },
+      render(code) {
+        console.log("code", code);
+        return code
+      }
+    }                 
+})
+    </script>
+
+
+</div>
+
+
