@@ -29,21 +29,8 @@ templateClass: tmpl-home
       <a target="_blank" href="https://www.tasteatlas.com/most-popular-dishes-in-{{title | lower | replace(' ', '-') }}">Most Popular</a>
     </p>
     
-    
-    {% if dishes %}
-    <h3>
-      Dishes we will cook
-    </h3>    
-    <ul>
-      {%- for dish in dishes -%}
-        <li>
-          <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
-      </li>
-      {%- endfor -%}
-    </ul>
-  
-    {% endif %}
-   {% if possibles %}
+
+       {% if possibles %}
     <h3>
       Possible Dishes
     </h3>
@@ -58,18 +45,19 @@ templateClass: tmpl-home
     </ul>
     {% endif %}
     
-    {% if sweets %}
+
+    {% if dishes %}
     <h3>
-      Sweets we will cook
+      The Menu
     </h3>    
     <ul>
-      {%- for dish in sweets -%}
+      {%- for dish in dishes -%}
         <li>
           <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
       </li>
       {%- endfor -%}
     </ul>
-    
+  
     {% endif %}
     {% if possiblesweets %}
     <h3>
@@ -86,31 +74,23 @@ templateClass: tmpl-home
     </ul>
     {% endif %}
     
+    {% if sweets %}
+    <h3>
+      Dessert
+    </h3>    
+    <ul>
+      {%- for dish in sweets -%}
+        <li>
+          <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
+      </li>
+      {%- endfor -%}
+    </ul>
+    
+    {% endif %}
     
     {# Content from the body of the post markdown appears here #}
     {{ content | safe }}
     
-    <!--
-    
-<div id="map" style="width: 1200px; height: 700px"></div>
-    
-    
-  <script>  
-const map = new jsVectorMap({
-  selector: '#map',
-  map: 'world',
-  selectedRegions: ['{{iso}}'],
-    regionStyle: {
-    selected: { fill: 'red' },
-    selectedHover: { fill: 'purple' },
-      render(code) {
-        console.log("code", code);
-        return code
-      }
-    }                 
-})
-    </script>
-    -->
     
     <div class="controls">
     {# The previous and next post data is added in .eleventy.js #}
@@ -127,7 +107,14 @@ const map = new jsVectorMap({
       </p>
     {% endif %}
     </div>
+    
+    <script src="https://utteranc.es/client.js"
+      repo="stretchyboy/our-food-challenge"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+    
   </div>
-  
-  
 </div>

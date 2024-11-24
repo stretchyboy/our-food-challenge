@@ -25,6 +25,11 @@ to this section's matching END comment to see page-specific styles.
   display: none !important;
 }
 
+
+img{
+  max-width: 100vh;
+}
+
 /* Import fonts */
 @font-face {
   font-family: HK Grotesk;
@@ -100,6 +105,8 @@ a:not(.btn--remix):visited {
 /******************************************************************************
 END Glitch hello-app default styles
 ******************************************************************************/
+
+
 
 /* Page structure */
 body {
@@ -224,4 +231,8 @@ a:hover {
 }
 .controls {
   margin: 3rem 0 2rem;
+}
+
+.utterances{
+  position: default;
 }

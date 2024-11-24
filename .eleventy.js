@@ -1,5 +1,7 @@
 const { DateTime } = require("luxon");
 const pluginSEO = require("eleventy-plugin-seo");
+const pluginMermaid = require("@kevingimbel/eleventy-plugin-mermaid");
+const pluginMarkdownItCheckbox = require("markdown-it-task-checkbox-pro");
 
 /**
 * This is the JavaScript code that determines the config for your Eleventy site
@@ -36,7 +38,11 @@ module.exports = function(eleventyConfig) {
     seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
   }
   eleventyConfig.addPlugin(pluginSEO, seo);
+  
+  eleventyConfig.addPlugin(pluginMermaid);
 
+ // eleventyConfig.use(pluginMarkdownItCheckbox);
+  
   // Filters let you modify the content https://www.11ty.dev/docs/filters/
   eleventyConfig.addFilter("htmlDateString", dateObj => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");

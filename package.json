@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "eleventy-plugin-seo": "0.5.2",
-    "luxon": "^3.4.0"
+    "luxon": "^3.5.0",
+    "@kevingimbel/eleventy-plugin-mermaid": "^2.2.1",
+    "markdown-it-task-checkbox-pro": "^1.0.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0"
