@@ -1,1 +1,197 @@
-{}
+{
+  "/posts/liberia/": {
+    "accepted": [
+      {
+        "name": "Liberian Groundpea Soup and Rice",
+        "url": "https://sweetbasilnspice.blogspot.com/2012/09/liberian-groundpea-soup-and-rice.html",
+        "issueNumber": 16,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/16",
+        "labels": [
+          "recipe-suggestion",
+          "accepted"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:35:11Z"
+      }
+    ],
+    "suggestions": [
+      {
+        "name": "Palaver sauce",
+        "url": "https://en.wikipedia.org/wiki/Palaver_sauce",
+        "issueNumber": 17,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/17",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:19:01Z"
+      },
+      {
+        "name": "Liberian Check Rice",
+        "url": "https://www.internationalcuisine.com/liberian-check-rice/",
+        "issueNumber": 15,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/15",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:19:01Z"
+      }
+    ]
+  },
+  "/posts/kuwait/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/kuwait/",
+        "url": "https://our-food-challenge.glitch.me/posts/kuwait/](https://our-food-challenge.glitch.me/posts/kuwait/",
+        "issueNumber": 12,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/12",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:19:00Z"
+      }
+    ]
+  },
+  "/posts/guyana/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/guyana/",
+        "url": "https://our-food-challenge.glitch.me/posts/guyana/](https://our-food-challenge.glitch.me/posts/guyana/",
+        "issueNumber": 11,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/11",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:19:00Z"
+      }
+    ]
+  },
+  "/posts/guinea-bissau/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/guinea-bissau/",
+        "url": "https://our-food-challenge.glitch.me/posts/guinea-bissau/](https://our-food-challenge.glitch.me/posts/guinea-bissau/",
+        "issueNumber": 10,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/10",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:59Z"
+      }
+    ]
+  },
+  "/posts/grenada/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/grenada/",
+        "url": "https://our-food-challenge.glitch.me/posts/grenada/](https://our-food-challenge.glitch.me/posts/grenada/",
+        "issueNumber": 9,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/9",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:59Z"
+      }
+    ]
+  },
+  "/posts/eswatini/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/eswatini/",
+        "url": "https://our-food-challenge.glitch.me/posts/eswatini/](https://our-food-challenge.glitch.me/posts/eswatini/",
+        "issueNumber": 8,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/8",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:58Z"
+      }
+    ]
+  },
+  "/posts/djibouti/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/djibouti/",
+        "url": "https://our-food-challenge.glitch.me/posts/djibouti/](https://our-food-challenge.glitch.me/posts/djibouti/",
+        "issueNumber": 7,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/7",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:58Z"
+      }
+    ]
+  },
+  "/posts/equatorial-guinea/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/equatorial-guinea/",
+        "url": "https://our-food-challenge.glitch.me/posts/equatorial-guinea/](https://our-food-challenge.glitch.me/posts/equatorial-guinea/",
+        "issueNumber": 6,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/6",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:57Z"
+      },
+      {
+        "name": "posts/equatorial-guinea/",
+        "url": "https://our-food-challenge.glitch.me/posts/equatorial-guinea/](https://our-food-challenge.glitch.me/posts/equatorial-guinea/",
+        "issueNumber": 5,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/5",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:57Z"
+      }
+    ]
+  },
+  "/posts/cook-islands/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/cook-islands/",
+        "url": "https://our-food-challenge.glitch.me/posts/cook-islands/](https://our-food-challenge.glitch.me/posts/cook-islands/",
+        "issueNumber": 4,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/4",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:57Z"
+      }
+    ]
+  },
+  "/posts/burundi/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "posts/burundi/",
+        "url": "https://our-food-challenge.glitch.me/posts/burundi/](https://our-food-challenge.glitch.me/posts/burundi/",
+        "issueNumber": 3,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/3",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "course": "main",
+        "updatedAt": "2026-02-14T22:18:56Z"
+      }
+    ]
+  }
+}

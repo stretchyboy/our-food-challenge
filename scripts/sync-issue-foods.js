@@ -87,27 +87,23 @@ function classifyIssue(issue) {
 
   const isAccepted = labels.has("accepted");
   const isRejected = labels.has("rejected");
-  const isDessert = labels.has("dessert");
 
   if (isRejected) {
     return null;
   }
 
-  if (isAccepted && isDessert) {
-    return "sweets";
-  }
   if (isAccepted) {
-    return "dishes";
+    return "accepted";
   }
-  if (isDessert) {
-    return "possiblesweets";
-  }
-  return "possibles";
+  return "suggestions";
 }
 
 function buildEntry(issue) {
   const labels = issue.labels.map((label) => (label.name || "").toLowerCase());
   const course = labels.includes("dessert") ? "dessert" : labels.includes("starter") ? "starter" : labels.includes("main") ? "main" : "main";
+  const dietaryTags = labels.filter((label) => ["vegetarian", "vegan", "fish", "shellfish", "gluten-free", "onion-free"].includes(label));
+  const requiresAdaptation = labels.includes("requires-adaptation");
+  const displayLabels = labels.filter((label) => !["recipe-suggestion", "accepted"].includes(label));
 
   return {
     name: extractRecipeName(issue),
@@ -115,7 +111,10 @@ function buildEntry(issue) {
     issueNumber: issue.number,
     issueUrl: issue.html_url,
     labels,
+    displayLabels,
     course,
+    dietaryTags,
+    requiresAdaptation,
     updatedAt: issue.updated_at,
   };
 }
@@ -214,10 +213,8 @@ async function run() {
 
     if (!grouped[pathname]) {
       grouped[pathname] = {
-        dishes: [],
-        sweets: [],
-        possibles: [],
-        possiblesweets: [],
+        accepted: [],
+        suggestions: [],
       };
     }
 
@@ -226,7 +223,7 @@ async function run() {
   }
 
   for (const pathname of Object.keys(grouped)) {
-    for (const key of ["dishes", "sweets", "possibles", "possiblesweets"]) {
+    for (const key of ["accepted", "suggestions"]) {
       grouped[pathname][key].sort((a, b) =>
         Date.parse(b.updatedAt || "") - Date.parse(a.updatedAt || "")
       );

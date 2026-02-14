@@ -36,6 +36,64 @@ templateClass: tmpl-home
       <a target="_blank" href="https://www.google.com/search?q={{title | replace(' ', '+') }}+traditional+drinks">Drinks</a>
     </p>
 
+    {% set issueFood = issueFoods[page.url] %}
+    {% set acceptedRecipes = issueFood.accepted if issueFood and issueFood.accepted else [] %}
+    {% set suggestedRecipes = issueFood.suggestions if issueFood and issueFood.suggestions else [] %}
+
+    {% set contentParts = content | splitFirstParagraph %}
+    {{ contentParts.lead | safe }}
+    
+    
+    {% if acceptedRecipes %}
+    <h3>
+      Accepted recipes
+    </h3>    
+    <ul>
+      {%- for dish in acceptedRecipes -%}
+        <li>
+          {% if dish.name %}
+            {% if dish.url %}
+            <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
+            {% else %}
+            {{dish.name}}
+            {% endif %}
+          {% else %}
+          Recipe
+          {% endif %}
+          - <a target="_blank" href="{{dish.issueUrl}}">Issue #{{dish.issueNumber}}</a>
+          {% if dish.displayLabels and dish.displayLabels.length %}
+          - Labels: {{ dish.displayLabels | join(', ') }}
+          {% endif %}
+      </li>
+      {%- endfor -%}
+    </ul>
+  
+    {% endif %}
+   {% if suggestedRecipes %}
+    <h3>
+      Recipe suggestions
+    </h3>
+    <ul>
+      
+      {%- for dish in suggestedRecipes -%}
+        {% set dishName = dish.name if dish.name else 'Recipe' %}
+        <li>{{dishName}} -
+          <a target="_blank" href="{{dish.issueUrl}}">Issue #{{dish.issueNumber}}</a>
+          {% if dish.displayLabels and dish.displayLabels.length %}
+          - Labels: {{ dish.displayLabels | join(', ') }}
+          {% endif %}
+          {% if dish.url %}
+          - <a target="_blank" href="{{dish.url}}">Source</a>
+          {% endif %}
+      </li>
+      {%- endfor -%}
+    </ul>
+    {% endif %}
+    
+    
+    {# Content from the body of the post markdown appears here #}
+    {{ contentParts.rest | safe }}
+
     <div class="issueStarter">
       <p><strong>Suggest a recipe</strong></p>
       <p>
@@ -61,95 +119,23 @@ templateClass: tmpl-home
         <label for="recipe-issue-url">Source URL (optional)</label>
         <input id="recipe-issue-url" name="sourceUrl" type="url" placeholder="https://example.com/recipe" />
 
+        <fieldset>
+          <legend>Dietary tags</legend>
+          <label><input type="checkbox" name="dietary" value="vegetarian" /> vegetarian</label>
+          <label><input type="checkbox" name="dietary" value="vegan" /> vegan</label>
+          <label><input type="checkbox" name="dietary" value="fish" /> fish</label>
+          <label><input type="checkbox" name="dietary" value="shellfish" /> shellfish</label>
+          <label><input type="checkbox" name="dietary" value="gluten-free" /> gluten-free</label>
+          <label><input type="checkbox" name="dietary" value="onion-free" /> onion-free</label>
+        </fieldset>
+
+        <label><input type="checkbox" name="requiresAdaptation" value="requires-adaptation" /> requires-adaptation</label>
+        <label for="recipe-issue-adaptation-notes">Adaptation notes (optional)</label>
+        <textarea id="recipe-issue-adaptation-notes" name="adaptationNotes" rows="3" placeholder="What would need to change?"></textarea>
+
         <button type="submit">Start issue from this page</button>
       </form>
     </div>
-
-    {% set issueFood = issueFoods[page.url] %}
-    {% set renderDishes = issueFood.dishes if issueFood and issueFood.dishes else [] %}
-    {% set renderPossibles = issueFood.possibles if issueFood and issueFood.possibles else [] %}
-    {% set renderSweets = issueFood.sweets if issueFood and issueFood.sweets else [] %}
-    {% set renderPossibleSweets = issueFood.possiblesweets if issueFood and issueFood.possiblesweets else [] %}
-
-    {% set contentParts = content | splitFirstParagraph %}
-    {{ contentParts.lead | safe }}
-    
-    
-    {% if renderDishes %}
-    <h3>
-      Dishes we will cook
-    </h3>    
-    <ul>
-      {%- for dish in renderDishes -%}
-        <li>
-          {% if dish.url %}
-          <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
-          {% else %}
-          {{dish.name}}
-          {% endif %}
-      </li>
-      {%- endfor -%}
-    </ul>
-  
-    {% endif %}
-   {% if renderPossibles %}
-    <h3>
-      Possible Dishes
-    </h3>
-    <ul>
-      
-      {%- for dish in renderPossibles -%}
-        {% set dishName = dish.name if dish.name else dish %}
-        <li>{{dishName}} - 
-          {% if dish.url %}
-          <a target="_blank" href="{{dish.url}}">Source</a>
-          {% endif %}
-          <a target="_blank" href="https://www.tasteatlas.com/{{dishName | lower | replace(' ', '-') }}">Taste Atlas</a>
-          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dishName | replace(' ', '+') }}+recipe">Google Recipe</a>
-      </li>
-      {%- endfor -%}
-    </ul>
-    {% endif %}
-    
-    {% if renderSweets %}
-    <h3>
-      Sweets we will cook
-    </h3>    
-    <ul>
-      {%- for dish in renderSweets -%}
-        <li>
-          {% if dish.url %}
-          <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
-          {% else %}
-          {{dish.name}}
-          {% endif %}
-      </li>
-      {%- endfor -%}
-    </ul>
-    
-    {% endif %}
-    {% if renderPossibleSweets %}
-    <h3>
-      Possible Sweet Dishes
-    </h3>
-    <ul>
-      
-      {%- for dish in renderPossibleSweets -%}
-        {% set dishName = dish.name if dish.name else dish %}
-        <li>{{dishName}} - 
-          {% if dish.url %}
-          <a target="_blank" href="{{dish.url}}">Source</a>
-          {% endif %}
-          <a target="_blank" href="https://www.tasteatlas.com/{{dishName | lower | replace(' ', '-') }}">Taste Atlas</a>
-          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dishName | replace(' ', '+') }}+recipe">Google Recipe</a>
-      </li>
-      {%- endfor -%}
-    </ul>
-    {% endif %}
-    
-    
-    {# Content from the body of the post markdown appears here #}
-    {{ contentParts.rest | safe }}
 
     <script>
 (() => {
@@ -165,15 +151,34 @@ templateClass: tmpl-home
     const recipeName = (form.elements.recipeName?.value || "").trim()
     const course = (form.elements.course?.value || "main").trim()
     const sourceUrl = (form.elements.sourceUrl?.value || "").trim()
+    const adaptationNotes = (form.elements.adaptationNotes?.value || "").trim()
+
+    const dietaryTags = Array.from(form.querySelectorAll('input[name="dietary"]:checked'))
+      .map(input => input.value)
+
+    const requiresAdaptation = Boolean(form.elements.requiresAdaptation?.checked)
+    const labels = ["recipe-suggestion", course, ...dietaryTags]
+    if (requiresAdaptation) {
+      labels.push("requires-adaptation")
+    }
 
     const params = new URLSearchParams()
     params.set("template", "recipe-suggestion.yml")
-    params.set("labels", "recipe-suggestion")
+    params.set("labels", Array.from(new Set(labels)).join(","))
     params.set("country_path", countryPath)
     params.set("course", course)
     params.set("recipe_name", recipeName)
     params.set("title", `Recipe suggestion: ${recipeName || `${countryTitle} recipe`}`)
     params.set("rationale", `Candidate recipe for ${countryTitle}.`)
+    if (dietaryTags.length) {
+      params.set("dietary", dietaryTags.join(", "))
+    }
+    if (requiresAdaptation) {
+      params.set("adaptation", "requires-adaptation")
+    }
+    if (adaptationNotes) {
+      params.set("adaptation_notes", adaptationNotes)
+    }
 
     if (sourceUrl) {
       params.set("source_url", sourceUrl)
