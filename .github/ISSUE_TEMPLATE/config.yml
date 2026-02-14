@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: General comments on country pages
+    url: https://our-food-challenge.pages.dev/posts/
+    about: Use page comments for discussion; use recipe suggestion issues for structured proposals.

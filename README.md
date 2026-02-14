@@ -19,10 +19,11 @@ Each post in `src/posts/*.md` can include:
 
 - `title`
 - `iso` (2-letter country code)
-- `dishes`, `sweets`, `possibles`, `possiblesweets`
 - `mapFocus` (optional):
   - `coords: [lat, lng]`
   - `scale: number`
+
+Recipe planning data is now sourced from GitHub Issues into `src/_data/issueFoods.json` at build time.
 
 If `mapFocus` exists, maps focus on coordinates. Otherwise they focus by region code.
 
@@ -49,7 +50,34 @@ If `mapFocus` exists, maps focus on coordinates. Otherwise they focus by region 
 
 - Install: `npm install`
 - Dev server: `npm start`
+- Sync issue data: `npm run sync:issue-foods`
 - Production build: `npm run build`
+
+### Issue labels for recipe triage
+
+- Required workflow label: `recipe-suggestion`
+- Decision labels: `accepted`, `rejected`
+- Course labels: `starter`, `main`, `dessert`
+- Dietary labels: `vegetarian`, `vegan`, `fish`, `shellfish`, `gluten-free`, `onion-free`
+- Adaptation label: `requires-adaptation`
+- Reserved system label: `comments` (used by Utterances discussion threads)
+
+### How a recipe issue shows on a page
+
+1. Create a new issue with the `Recipe suggestion` form.
+2. Set `Country page path` to the exact post path (example: `/posts/bahamas/`).
+3. Keep label `recipe-suggestion`.
+4. Add a course label (`starter`, `main`, or `dessert`).
+5. Set decision label:
+  - `accepted` -> shows in "Dishes we will cook" (or "Sweets we will cook" for `dessert`)
+  - no decision label -> shows in "Possible Dishes" (or "Possible Sweet Dishes" for `dessert`)
+  - `rejected` -> not shown on page
+6. Run `npm run build` (or `npm run sync:issue-foods`) to refresh `src/_data/issueFoods.json`.
+7. Eleventy reads `issueFoods[page.url]` in `src/_includes/layouts/post.njk` and renders those sections.
+
+Notes:
+- `comments` issues from Utterances are ignored by the recipe sync.
+- The page path must match exactly (including trailing slash).
 
 ### Cloudflare Pages
 

@@ -32,60 +32,116 @@ templateClass: tmpl-home
       <a target="_blank" href="https://en.wikipedia.org/wiki/{{title}}">Wikipedia</a>
       <a target="_blank" href="https://www.google.com/search?q={{title}}+national+dish">National Dish</a>
       <a target="_blank" href="https://www.tasteatlas.com/most-popular-dishes-in-{{title | lower | replace(' ', '-') }}">Most Popular</a>
+      <a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{title | replace(' ', '+') }}+traditional+restaurants">Restaurants</a>
+      <a target="_blank" href="https://www.google.com/search?q={{title | replace(' ', '+') }}+traditional+drinks">Drinks</a>
     </p>
+
+    <div class="issueStarter">
+      <p><strong>Suggest a recipe</strong></p>
+      <p>
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://github.com/stretchyboy/our-food-challenge/issues/new?template=recipe-suggestion.yml&labels=recipe-suggestion&country_path={{ page.url }}"
+        >
+          Open recipe suggestion form
+        </a>
+      </p>
+      <form id="recipe-issue-form" class="recipeIssueForm" data-country-path="{{ page.url }}" data-country-title="{{ title }}">
+        <label for="recipe-issue-name">Recipe name</label>
+        <input id="recipe-issue-name" name="recipeName" type="text" placeholder="Conch salad" />
+
+        <label for="recipe-issue-course">Course</label>
+        <select id="recipe-issue-course" name="course">
+          <option value="starter">starter</option>
+          <option value="main" selected>main</option>
+          <option value="dessert">dessert</option>
+        </select>
+
+        <label for="recipe-issue-url">Source URL (optional)</label>
+        <input id="recipe-issue-url" name="sourceUrl" type="url" placeholder="https://example.com/recipe" />
+
+        <button type="submit">Start issue from this page</button>
+      </form>
+    </div>
+
+    {% set issueFood = issueFoods[page.url] %}
+    {% set renderDishes = issueFood.dishes if issueFood and issueFood.dishes else [] %}
+    {% set renderPossibles = issueFood.possibles if issueFood and issueFood.possibles else [] %}
+    {% set renderSweets = issueFood.sweets if issueFood and issueFood.sweets else [] %}
+    {% set renderPossibleSweets = issueFood.possiblesweets if issueFood and issueFood.possiblesweets else [] %}
+
+    {% set contentParts = content | splitFirstParagraph %}
+    {{ contentParts.lead | safe }}
     
     
-    {% if dishes %}
+    {% if renderDishes %}
     <h3>
       Dishes we will cook
     </h3>    
     <ul>
-      {%- for dish in dishes -%}
+      {%- for dish in renderDishes -%}
         <li>
+          {% if dish.url %}
           <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
+          {% else %}
+          {{dish.name}}
+          {% endif %}
       </li>
       {%- endfor -%}
     </ul>
   
     {% endif %}
-   {% if possibles %}
+   {% if renderPossibles %}
     <h3>
       Possible Dishes
     </h3>
     <ul>
       
-      {%- for dish in possibles -%}
-        <li>{{dish}} - 
-          <a target="_blank" href="https://www.tasteatlas.com/{{dish | lower | replace(' ', '-') }}">Taste Atlas</a>
-          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dish | replace(' ', '+') }}+recipe">Google Recipe</a>
+      {%- for dish in renderPossibles -%}
+        {% set dishName = dish.name if dish.name else dish %}
+        <li>{{dishName}} - 
+          {% if dish.url %}
+          <a target="_blank" href="{{dish.url}}">Source</a>
+          {% endif %}
+          <a target="_blank" href="https://www.tasteatlas.com/{{dishName | lower | replace(' ', '-') }}">Taste Atlas</a>
+          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dishName | replace(' ', '+') }}+recipe">Google Recipe</a>
       </li>
       {%- endfor -%}
     </ul>
     {% endif %}
     
-    {% if sweets %}
+    {% if renderSweets %}
     <h3>
       Sweets we will cook
     </h3>    
     <ul>
-      {%- for dish in sweets -%}
+      {%- for dish in renderSweets -%}
         <li>
+          {% if dish.url %}
           <a target="_blank" href="{{dish.url}}">{{dish.name}}</a>
+          {% else %}
+          {{dish.name}}
+          {% endif %}
       </li>
       {%- endfor -%}
     </ul>
     
     {% endif %}
-    {% if possiblesweets %}
+    {% if renderPossibleSweets %}
     <h3>
       Possible Sweet Dishes
     </h3>
     <ul>
       
-      {%- for dish in possiblesweets -%}
-        <li>{{dish}} - 
-          <a target="_blank" href="https://www.tasteatlas.com/{{dish | lower | replace(' ', '-') }}">Taste Atlas</a>
-          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dish | replace(' ', '+') }}+recipe">Google Recipe</a>
+      {%- for dish in renderPossibleSweets -%}
+        {% set dishName = dish.name if dish.name else dish %}
+        <li>{{dishName}} - 
+          {% if dish.url %}
+          <a target="_blank" href="{{dish.url}}">Source</a>
+          {% endif %}
+          <a target="_blank" href="https://www.tasteatlas.com/{{dishName | lower | replace(' ', '-') }}">Taste Atlas</a>
+          <a target="_blank" href="https://www.google.com/search?q={{title | lower | replace(' ', '+')}}+{{dishName | replace(' ', '+') }}+recipe">Google Recipe</a>
       </li>
       {%- endfor -%}
     </ul>
@@ -93,7 +149,40 @@ templateClass: tmpl-home
     
     
     {# Content from the body of the post markdown appears here #}
-    {{ content | safe }}
+    {{ contentParts.rest | safe }}
+
+    <script>
+(() => {
+  const form = document.getElementById("recipe-issue-form")
+  if (!form) return
+
+  form.addEventListener("submit", event => {
+    event.preventDefault()
+
+    const countryPath = form.dataset.countryPath || ""
+    const countryTitle = form.dataset.countryTitle || ""
+
+    const recipeName = (form.elements.recipeName?.value || "").trim()
+    const course = (form.elements.course?.value || "main").trim()
+    const sourceUrl = (form.elements.sourceUrl?.value || "").trim()
+
+    const params = new URLSearchParams()
+    params.set("template", "recipe-suggestion.yml")
+    params.set("labels", "recipe-suggestion")
+    params.set("country_path", countryPath)
+    params.set("course", course)
+    params.set("recipe_name", recipeName)
+    params.set("title", `Recipe suggestion: ${recipeName || `${countryTitle} recipe`}`)
+    params.set("rationale", `Candidate recipe for ${countryTitle}.`)
+
+    if (sourceUrl) {
+      params.set("source_url", sourceUrl)
+    }
+
+    window.open(`https://github.com/stretchyboy/our-food-challenge/issues/new?${params.toString()}`, "_blank", "noopener")
+  })
+})()
+    </script>
     
     <script>
 const map = new jsVectorMap({
