@@ -1,86 +1,84 @@
-# Hello Eleventy!
+# Our Food Challenge
 
-This project is a blog powered by [Eleventy](https://www.11ty.dev/), a lightweight static site generator. That means you get all the power of a server-side framework but it builds plain HTML files for fast loading by your visitors. This project includes some default posts and layouts you can use as a foundation, and you can customize how your site builds in the JavaScript code. 📚
+Food-focused country planner site built with Eleventy and deployed on Cloudflare Pages.
 
-_While you're working on the content in the editor your changes will happen ✨ immediately in the preview window. As you code the site is serving files from a local build directory. When you close the editor your site will run a `build` script then serve the output as a fast and always-on static site._
+Live site: https://our-food-challenge.pages.dev
 
-_Last updated: 14 August 2023_
+## What this project does today
 
-## Deploy on Cloudflare Pages (free)
+- Publishes a static site with pages for countries we want to cook from.
+- Uses Markdown posts in `src/posts/` as the source of truth.
+- Shows flags for each country via FlagCDN.
+- Shows regional vector maps with country highlighting using `jsvectormap`.
+- Supports map fallback for tiny islands/microstates using front matter `mapFocus` coordinates.
+- Outputs static HTML into `build/` for Cloudflare Pages.
 
-This project is ready for Cloudflare Pages with:
+## Core behavior and data model
+
+Each post in `src/posts/*.md` can include:
+
+- `title`
+- `iso` (2-letter country code)
+- `dishes`, `sweets`, `possibles`, `possiblesweets`
+- `mapFocus` (optional):
+  - `coords: [lat, lng]`
+  - `scale: number`
+
+If `mapFocus` exists, maps focus on coordinates. Otherwise they focus by region code.
+
+## Tech stack
+
+- Eleventy 2
+- Nunjucks layouts
+- Cloudflare Pages deploy
+- `eleventy-plugin-seo`
+- `jsvectormap` (CDN)
+
+## Key project files
+
+- `src/_includes/layouts/home.njk` - Home page table and map rendering
+- `src/_includes/layouts/post.njk` - Individual country page rendering
+- `src/seo.json` - Site title/description/canonical/image config
+- `.eleventy.js` - Build config, SEO URL logic, collections
+- `scripts/validate-post-maps.js` - Build-time map metadata warnings
+- `public/style.css` - Site styling and typography
+
+## Build and deploy
+
+### Local
+
+- Install: `npm install`
+- Dev server: `npm start`
+- Production build: `npm run build`
+
+### Cloudflare Pages
 
 - Build command: `npm run build`
-- Build output directory: `build`
-- Node version: `20` (via `.node-version`)
+- Output directory: `build`
+- Node: `20+`
 
-### One-time setup
+## SEO setup
 
-1. Push this repo to GitHub.
-2. In Cloudflare dashboard, go to **Pages** → **Create a project** → **Connect to Git**.
-3. Select this repository.
-4. Use these settings:
-	- **Framework preset**: `None` (or `Eleventy` if listed)
-	- **Build command**: `npm run build`
-	- **Build output directory**: `build`
-5. Click **Save and Deploy**.
+- Canonical/base URL is set in `src/seo.json` as `https://our-food-challenge.pages.dev`
+- Social preview image is configured in `src/seo.json` `image`
+- Codespaces previews override URL at build-time in `.eleventy.js`
 
-### Ongoing updates
+## Current constraints
 
-1. Edit files in `src/`.
-2. Commit and push to `main`.
-3. Cloudflare Pages will build and deploy automatically.
+- Some social networks prefer PNG for `og:image`; current social card is SVG unless `public/social-card.png` is generated.
+- Tiny countries may not exist as selectable world polygons; those need `mapFocus` coordinates.
 
-### Local development
+## Next wave candidates
 
-- Install dependencies: `npm install`
-- Run local preview: `npm start`
-- Run production build: `npm run build`
+1. Generate and commit `public/social-card.png` for maximum social compatibility.
+2. Add a small script to suggest `mapFocus` defaults from country metadata.
+3. Normalize all post front matter fields (consistent ordering and optional field docs).
+4. Improve home table UX (sort/filter by region or status).
+5. Replace remaining CDN dependencies with self-hosted assets where practical.
 
-## Prerequisites
+## Review checklist for next changes
 
-You'll get best use out of this project if you're familiar with basic HTML and JavaScript. This is a static site, which means the server builds it using the content of the `src` folder, then is able to serve it to your users quickly. The posts are in Markdown, which is similar to HTML (markup) but with a lot less syntax!
-
-## What's in this project?
-
-← `README.md`: That’s this file, where you can tell people what your cool website does and how you built it.
-
-← `public/style.css`: The styling rules for your pages and posts.
-
-← `.eleventy.js`: Here you can configure how Eleventy builds your content into the site. Read through the initial blog posts in the site for steps on extending this code.
-
-← `package.json`: Your project's dependencies, where you will also find the start command to run eleventy. 
-
-← `src/`: This folder contains all the files Eleventy will use to build your site.
-
-### Working in the `src/` folder 📁
-
-← `index.md`, `posts.md`, `about.md`: These Markdown files include the content for your Home, Posts, and About pages.
-
-← `posts/`: These are the Markdown files for the posts that make up your blog–you can add new posts here and remove any you don't want. Each one includes front matter that Eleventy uses to build the content into the site, passing the data into the template referenced as `layout` at the top of the file.
-
-← `_includes/layouts/`: This is where all of your page level layouts go. The **\_** tells you that this is an _eleventy only_ folder. Each layout uses [Nunjucks](https://mozilla.github.io/nunjucks/templating.html) to build the page or post data into an HTML page. There is one base layout that all others extend.
-
-← `seo.json`: When you're ready to share your new site or add a custom domain, change SEO/meta settings in here.
-
-___Want a basic template version of this project to build your own Eleventy app? Check out [Minimal Eleventy](https://glitch.com/edit/#!/remix/11ty)!___
-
-## Try this next 🏗️
-
-With the site preview open on the right and the Glitch editor open on the left, navigate through the initial blog posts to learn more and carry out some development on your Eleventy site!
-
-Your site can use incremental builds, so if for example you only change a markdown file, Glitch would just rewrite the relevant page instead of rebuilding the whole site–to enable this, change your `package.json` `start` command to `eleventy --incremental --serve`. 
-
-_When you add or delete a file and your preview does not update straight away on refresh, you can enter `eleventy --serve` in your project terminal to force a rewrite._
-
-Check out `TODO.md` for some more optional next steps.
-
-![Glitch](https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2FLogo_Color.svg?v=1602781328576)
-
-## You built this with Glitch!
-
-[Glitch](https://glitch.com) is a friendly community where millions of people come together to build web apps and websites.
-
-- Want more details about Eleventy on Glitch? We've got a [Help Center article](https://help.glitch.com/hc/en-us/articles/16287563161229-Eleventy-Projects) just for that.
-- Need more help? [Check out our Help Center](https://help.glitch.com/) for answers to any common questions.
-- Ready to make it official? [Become a paid Glitch member](https://glitch.com/pricing) to boost your app with private sharing, more storage and memory, domains and more.
+- Is every post using correct `iso`?
+- Do tiny-island posts have `mapFocus`?
+- Does `npm run build` produce no warnings we care about?
+- Does deployed SEO metadata show correct canonical/image?

@@ -28,17 +28,17 @@ module.exports = function(eleventyConfig) {
   /* From: https://github.com/artstorm/eleventy-plugin-seo
   
   Adds SEO settings to the top of all pages
-  The "glitch-default" bit allows someone to set the url in seo.json while
-  still letting it have a proper glitch.me address via PROJECT_DOMAIN
   */
   const seo = require("./src/seo.json");
-  if (seo.url === "glitch-default") {
-    if (process.env.CF_PAGES_URL) {
-      seo.url = `https://${process.env.CF_PAGES_URL}`;
-    } else if (process.env.PROJECT_DOMAIN) {
-      seo.url = `https://${process.env.PROJECT_DOMAIN}.glitch.me`;
-    }
-  }
+  const port = process.env.PORT || 8080;
+  const configuredUrl = (seo.url || "").replace(/\/$/, "");
+
+  seo.url =
+    process.env.CODESPACES === "true" &&
+    process.env.CODESPACE_NAME &&
+    process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN
+      ? `https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`
+      : configuredUrl || "https://our-food-challenge.pages.dev";
   eleventyConfig.addPlugin(pluginSEO, seo);
 
   // Filters let you modify the content https://www.11ty.dev/docs/filters/

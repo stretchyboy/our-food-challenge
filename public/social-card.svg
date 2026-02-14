@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Yummy World social card</title>
+  <desc id="desc">World map themed card for Yummy World food challenge site.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f2742" />
+      <stop offset="100%" stop-color="#19395d" />
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8deff" />
+      <stop offset="100%" stop-color="#8ec8ff" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <rect x="42" y="42" width="1116" height="546" rx="28" fill="#122f4d" stroke="#86c6ff" stroke-opacity="0.45" />
+
+  <ellipse cx="760" cy="338" rx="310" ry="180" fill="url(#sea)" fill-opacity="0.28" />
+
+  <g fill="#d8ecff" fill-opacity="0.9">
+    <path d="M650 246l28-20 22 9 14 29-17 16-33-4-21-15z" />
+    <path d="M752 286l38-14 40 15 20 32-15 30-48 12-40-14-12-31z" />
+    <path d="M687 336l24-11 31 10 7 20-17 18-31 2-20-14z" />
+    <path d="M842 382l20-7 18 7 4 15-12 10-19-2-11-9z" />
+    <path d="M915 297l11-5 11 5 3 10-7 7-12-1-6-6z" />
+  </g>
+
+  <g transform="translate(96 410)">
+    <rect x="0" y="0" width="64" height="42" rx="6" fill="#e63946" />
+    <rect x="78" y="0" width="64" height="42" rx="6" fill="#ffb703" />
+    <rect x="156" y="0" width="64" height="42" rx="6" fill="#06d6a0" />
+    <rect x="234" y="0" width="64" height="42" rx="6" fill="#3a86ff" />
+    <rect x="312" y="0" width="64" height="42" rx="6" fill="#8338ec" />
+  </g>
+
+  <text x="96" y="218" fill="#ffffff" font-size="76" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-weight="800">
+    Yummy World
+  </text>
+  <text x="96" y="278" fill="#c8e5ff" font-size="34" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-weight="500">
+    Eating our way round interesting countries.
+  </text>
+
+  <text x="96" y="352" fill="#9ed0ff" font-size="28" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif" font-weight="600">
+    Flags • Regional maps • Dish planning
+  </text>
+</svg>

@@ -1,5 +1,5 @@
 {
-  "name": "glitch-hello-eleventy",
+  "name": "our-food-challenge",
   "version": "0.1.0",
   "description": "A simple blog, set up with Eleventy.",
   "scripts": {
@@ -19,13 +19,13 @@
   "repository": {
     "url": "https://github.com/stretchyboy/our-food-challenge"
   },
-  "glitch": {
+  "our-food-challenge": {
     "projectType": "generated_static"
   },
   "license": "MIT",
   "keywords": [
     "node",
-    "glitch",
+    "our-food-challenge",
     "express"
   ]
 }
