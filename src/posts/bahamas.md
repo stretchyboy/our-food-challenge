@@ -12,6 +12,9 @@ date: 2023-09-03
 tags:
   - future
 layout: layouts/post.njk
+mapFocus:
+  coords: [25.0343, -77.3963]
+  scale: 3.2
 ---
 
 ### Planning

@@ -18,8 +18,7 @@ templateClass: tmpl-home
     <br /> 
     
     <img src="https://flagcdn.com/h240/{{iso | lower}}.png" height="200" />
-    <img src="https://www.worldometers.info/img/maps_c/{% if locator %}{{locator}}{% else %}{{iso}}{% endif %}-map.gif" height="200"/>
-    <img src="https://www.worldometers.info/img/maps_cl/{% if locator %}{{locator}}{% else %}{{iso}}{% endif %}-locator-map.gif" height="200"/>
+    <div id="country-map" style="width: 420px; height: 240px; display: inline-block;"></div>
     
     {# ADD P ELEMENT FROM TODO ON THE NEXT LINE #}
     
@@ -90,27 +89,39 @@ templateClass: tmpl-home
     {# Content from the body of the post markdown appears here #}
     {{ content | safe }}
     
-    <!--
-    
-<div id="map" style="width: 1200px; height: 700px"></div>
-    
-    
-  <script>  
+    <script>
 const map = new jsVectorMap({
-  selector: '#map',
+  selector: '#country-map',
   map: 'world',
-  selectedRegions: ['{{iso}}'],
-    regionStyle: {
+  backgroundColor: '#dff0ff',
+  selectedRegions: ['{% if mapRegion %}{{ mapRegion | upper }}{% else %}{{ iso | upper }}{% endif %}'],
+{% if mapFocus and mapFocus.coords %}
+  focusOn: {
+    coords: [{{ mapFocus.coords[0] }}, {{ mapFocus.coords[1] }}],
+    scale: {% if mapFocus.scale %}{{ mapFocus.scale }}{% else %}6{% endif %},
+    animate: true
+  },
+  markers: [{
+    coords: [{{ mapFocus.coords[0] }}, {{ mapFocus.coords[1] }}],
+    name: '{{ title }}'
+  }],
+{% else %}
+  focusOn: {
+    region: '{% if mapRegion %}{{ mapRegion | upper }}{% else %}{{ iso | upper }}{% endif %}',
+    animate: true
+  },
+{% endif %}
+  regionStyle: {
+    initial: { fill: '#4f6b7a', stroke: '#ffffff', strokeWidth: 0.25 },
+    hover: { fill: '#3f5865' },
     selected: { fill: 'red' },
-    selectedHover: { fill: 'purple' },
-      render(code) {
-        console.log("code", code);
-        return code
-      }
-    }                 
+    selectedHover: { fill: 'purple' }
+  },
+  zoomOnScroll: false,
+  zoomButtons: false,
+  panOnDrag: false
 })
     </script>
-    -->
     
     <div class="controls">
     {# The previous and next post data is added in .eleventy.js #}

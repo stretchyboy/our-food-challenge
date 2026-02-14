@@ -4,7 +4,7 @@
   "description": "A simple blog, set up with Eleventy.",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "NODE_ENV=production eleventy"
+    "build": "node scripts/validate-post-maps.js && NODE_ENV=production eleventy"
   },
   "dependencies": {
     "eleventy-plugin-seo": "0.5.2",

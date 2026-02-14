@@ -7,4 +7,7 @@ date:
 tags:
   - posts
 layout: layouts/post.njk
+mapFocus:
+  coords: [-11.8750, 43.8722]
+  scale: 3.2
 ---

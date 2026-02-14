@@ -21,10 +21,16 @@ templateClass: tmpl-home
           <img src="https://flagcdn.com/h60/{{post.data.iso | lower}}.png" height="50" />
         </td>
         <td>
-         <img src="https://www.worldometers.info/img/maps_c/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-map.gif" height="50"/>
-        </td>
-        <td>
-         <img src="https://www.worldometers.info/img/maps_cl/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-locator-map.gif" height="50"/>
+          <div
+            class="mini-map"
+            style="width: 100px; height: 60px;"
+            data-iso="{% if post.data.mapRegion %}{{ post.data.mapRegion | upper }}{% else %}{{ post.data.iso | upper }}{% endif %}"
+            {% if post.data.mapFocus and post.data.mapFocus.coords %}
+            data-lat="{{ post.data.mapFocus.coords[0] }}"
+            data-lng="{{ post.data.mapFocus.coords[1] }}"
+            data-scale="{% if post.data.mapFocus.scale %}{{ post.data.mapFocus.scale }}{% else %}3.2{% endif %}"
+            {% endif %}
+          ></div>
         </td>
      </tr> 
      {%- endfor -%}
@@ -63,6 +69,7 @@ templateClass: tmpl-home
 const map = new jsVectorMap({
   selector: '#map',
   map: 'world',
+  backgroundColor: '#dff0ff',
   selectedRegions: [
     
    {%- for post in collections.posts -%}
@@ -71,13 +78,54 @@ const map = new jsVectorMap({
   
   ],
     regionStyle: {
+    initial: { fill: '#4f6b7a', stroke: '#ffffff', strokeWidth: 0.25 },
+    hover: { fill: '#3f5865' },
     selected: { fill: 'red' },
-    selectedHover: { fill: 'purple' },
-      render(code) {
-        console.log("code", code);
-        return code
-      }
+    selectedHover: { fill: 'purple' }
     }                 
+})
+
+document.querySelectorAll('.mini-map').forEach((element, index) => {
+  const id = `mini-map-${index + 1}`
+  element.id = id
+
+  const iso = element.dataset.iso
+  const latitude = Number(element.dataset.lat)
+  const longitude = Number(element.dataset.lng)
+  const scale = Number(element.dataset.scale)
+
+  const config = {
+    selector: `#${id}`,
+    map: 'world',
+    backgroundColor: '#dff0ff',
+    selectedRegions: [iso],
+    regionStyle: {
+      initial: { fill: '#4f6b7a', stroke: '#ffffff', strokeWidth: 0.25 },
+      hover: { fill: '#3f5865' },
+      selected: { fill: 'red' },
+      selectedHover: { fill: 'red' }
+    },
+    zoomOnScroll: false,
+    zoomButtons: false,
+    panOnDrag: false,
+    draggable: false
+  }
+
+  if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+    config.focusOn = {
+      coords: [latitude, longitude],
+      scale: Number.isFinite(scale) ? scale : 3.2,
+      animate: false
+    }
+    config.markers = [{ coords: [latitude, longitude], name: iso }]
+  } else {
+    config.focusOn = {
+      region: iso,
+      animate: false
+    }
+  }
+
+  new jsVectorMap(config)
 })
     </script>
 
