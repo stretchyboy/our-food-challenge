@@ -46,6 +46,21 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
   });
 
+  eleventyConfig.addFilter("splitFirstParagraph", html => {
+    const source = `${html || ""}`;
+    const match = source.match(/<\/p>/i);
+
+    if (!match || typeof match.index !== "number") {
+      return { lead: "", rest: source };
+    }
+
+    const splitIndex = match.index + match[0].length;
+    return {
+      lead: source.slice(0, splitIndex),
+      rest: source.slice(splitIndex),
+    };
+  });
+
   eleventyConfig.setBrowserSyncConfig({ ghostMode: false });
 
   /* Build the collection of posts to list in the site

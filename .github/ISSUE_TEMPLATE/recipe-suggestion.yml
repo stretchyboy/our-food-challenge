@@ -1,0 +1,71 @@
+name: Recipe suggestion
+description: Suggest a recipe for a specific country page
+title: "Recipe suggestion: "
+labels:
+  - recipe-suggestion
+body:
+  - type: input
+    id: country_path
+    attributes:
+      label: Country page path
+      description: Use the page path, e.g. /posts/bahamas/
+      placeholder: /posts/bahamas/
+    validations:
+      required: true
+  - type: input
+    id: recipe_name
+    attributes:
+      label: Recipe name
+      placeholder: Conch salad
+    validations:
+      required: true
+  - type: input
+    id: source_url
+    attributes:
+      label: Source URL
+      description: Optional reference recipe URL
+      placeholder: https://example.com/recipe
+    validations:
+      required: false
+  - type: dropdown
+    id: course
+    attributes:
+      label: Course
+      options:
+        - starter
+        - main
+        - dessert
+    validations:
+      required: true
+  - type: checkboxes
+    id: dietary
+    attributes:
+      label: Dietary tags
+      options:
+        - label: vegetarian
+        - label: vegan
+        - label: fish
+        - label: shellfish
+        - label: gluten-free
+        - label: onion-free
+  - type: checkboxes
+    id: adaptation
+    attributes:
+      label: Adaptation
+      options:
+        - label: requires-adaptation
+  - type: textarea
+    id: adaptation_notes
+    attributes:
+      label: Adaptation notes
+      description: If adaptation is required, explain what changes are needed.
+      placeholder: Replace X with Y, omit Z, etc.
+    validations:
+      required: false
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why this recipe?
+      description: Why this is a good fit for the country and challenge.
+    validations:
+      required: true
