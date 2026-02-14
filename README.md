@@ -6,6 +6,37 @@ _While you're working on the content in the editor your changes will happen ✨ 
 
 _Last updated: 14 August 2023_
 
+## Deploy on Cloudflare Pages (free)
+
+This project is ready for Cloudflare Pages with:
+
+- Build command: `npm run build`
+- Build output directory: `build`
+- Node version: `20` (via `.node-version`)
+
+### One-time setup
+
+1. Push this repo to GitHub.
+2. In Cloudflare dashboard, go to **Pages** → **Create a project** → **Connect to Git**.
+3. Select this repository.
+4. Use these settings:
+	- **Framework preset**: `None` (or `Eleventy` if listed)
+	- **Build command**: `npm run build`
+	- **Build output directory**: `build`
+5. Click **Save and Deploy**.
+
+### Ongoing updates
+
+1. Edit files in `src/`.
+2. Commit and push to `main`.
+3. Cloudflare Pages will build and deploy automatically.
+
+### Local development
+
+- Install dependencies: `npm install`
+- Run local preview: `npm start`
+- Run production build: `npm run build`
+
 ## Prerequisites
 
 You'll get best use out of this project if you're familiar with basic HTML and JavaScript. This is a static site, which means the server builds it using the content of the `src` folder, then is able to serve it to your users quickly. The posts are in Markdown, which is similar to HTML (markup) but with a lot less syntax!

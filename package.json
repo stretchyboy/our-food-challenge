@@ -14,10 +14,10 @@
     "@11ty/eleventy": "^2.0.0"
   },
   "engines": {
-    "node": "14"
+    "node": ">=20"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-eleventy"
+    "url": "https://github.com/stretchyboy/our-food-challenge"
   },
   "glitch": {
     "projectType": "generated_static"
