@@ -50,6 +50,7 @@ If `mapFocus` exists, maps focus on coordinates. Otherwise they focus by region 
 
 - Install: `npm install`
 - Dev server: `npm start`
+- Sync issue labels: `npm run sync:issue-labels`
 - Sync issue data: `npm run sync:issue-foods`
 - Production build: `npm run build`
 
@@ -61,6 +62,11 @@ If `mapFocus` exists, maps focus on coordinates. Otherwise they focus by region 
 - Dietary labels: `vegetarian`, `vegan`, `fish`, `shellfish`, `gluten-free`, `onion-free`
 - Adaptation label: `requires-adaptation`
 - Reserved system label: `comments` (used by Utterances discussion threads)
+
+Important:
+- GitHub issue forms in `.github/ISSUE_TEMPLATE/*` only appear from the repository **default branch**.
+- If this work is on a feature branch, merge it to default branch before testing the form UI at `/issues/new`.
+- Labels are synced automatically by `npm run sync:issue-labels` (also run as part of `npm run build`) when `GITHUB_TOKEN` or `GH_TOKEN` is set with repo permissions.
 
 ### How a recipe issue shows on a page
 

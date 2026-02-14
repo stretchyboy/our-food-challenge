@@ -4,7 +4,11 @@ const path = require("path");
 const OUTPUT_FILE = path.join(__dirname, "..", "src", "_data", "issueFoods.json");
 const DEFAULT_REPO = "stretchyboy/our-food-challenge";
 const SYSTEM_COMMENT_LABEL = "comments";
-const SUGGESTION_LABEL = "recipe-suggestion";
+const SUGGESTION_LABELS = new Set(["recipe-suggestion", "recipe suggestion"]);
+
+function hasSuggestionLabel(labelNames) {
+  return labelNames.some((label) => SUGGESTION_LABELS.has(label));
+}
 
 function normalizePathname(value) {
   if (!value || typeof value !== "string") {
@@ -174,6 +178,7 @@ async function run() {
     skippedNoPath: 0,
     skippedWrongLabel: 0,
     skippedRejected: 0,
+    wrongLabelSamples: [],
   };
 
   for (const issue of issues) {
@@ -184,8 +189,14 @@ async function run() {
       continue;
     }
 
-    if (!labelNames.includes(SUGGESTION_LABEL)) {
+    if (!hasSuggestionLabel(labelNames)) {
       diagnostics.skippedWrongLabel += 1;
+      if (diagnostics.wrongLabelSamples.length < 5) {
+        diagnostics.wrongLabelSamples.push({
+          number: issue.number,
+          labels: labelNames,
+        });
+      }
       continue;
     }
 
@@ -230,6 +241,12 @@ async function run() {
   console.log(
     `[issue-sync] skipped: no-path=${diagnostics.skippedNoPath}, wrong-label=${diagnostics.skippedWrongLabel}, rejected=${diagnostics.skippedRejected}`
   );
+  if (diagnostics.wrongLabelSamples.length) {
+    console.log("[issue-sync] wrong-label examples:");
+    for (const sample of diagnostics.wrongLabelSamples) {
+      console.log(`  #${sample.number}: [${sample.labels.join(", ")}]`);
+    }
+  }
 }
 
 run().catch((error) => {
