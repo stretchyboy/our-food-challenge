@@ -63,6 +63,19 @@ If `mapFocus` exists, maps focus on coordinates. Otherwise they focus by region 
 - Social preview image is configured in `src/seo.json` `image`
 - Codespaces previews override URL at build-time in `.eleventy.js`
 
+## Comments (Utterances)
+
+- Comments are enabled on post pages via `utteranc.es` in `src/_includes/layouts/post.njk`.
+- Repository used for comment threads: `stretchyboy/our-food-challenge`.
+- Thread mapping: `issue-term="pathname"` (one GitHub issue per post URL).
+- Label used for created issues: `comments`.
+
+### Moderation
+
+- Open the repository Issues tab to review comment threads.
+- Moderate by editing/locking/closing the underlying GitHub issue.
+- Keep or filter by the `comments` label to manage comment-only issues.
+
 ## Current constraints
 
 - Some social networks prefer PNG for `og:image`; current social card is SVG unless `public/social-card.png` is generated.
