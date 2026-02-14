@@ -18,7 +18,7 @@ templateClass: tmpl-home
         </th>
         <td>{% if post.data.date %}{{ post.data.date | htmlDateString }}{% else %} &nbsp; {% endif %}</td>
         <td>   
-          <img src="https://www.worldatlas.com/r/w425/img/flag/{{post.data.iso| lower}}-flag.jpg" height="50" />
+          <img src="https://flagcdn.com/h60/{{post.data.iso | lower}}.png" height="50" />
         </td>
         <td>
          <img src="https://www.worldometers.info/img/maps_c/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-map.gif" height="50"/>
@@ -36,7 +36,7 @@ templateClass: tmpl-home
       {%- for post in collections.posts -%}
         <li{% if page.url == post.url %} aria-current="page"{% endif %}>{{ post.data.page.date | htmlDateString }} — <a href='{{ post.url }}'>{{ post.data.title }}</a>
           
-          <img src="https://www.worldatlas.com/r/w425/img/flag/{{post.data.iso| lower}}-flag.jpg" height="30" />
+          <img src="https://flagcdn.com/h40/{{post.data.iso | lower}}.png" height="30" />
           <img src="https://www.worldometers.info/img/maps_c/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-map.gif" height="30"/>
           <img src="https://www.worldometers.info/img/maps_cl/{% if post.data.locator %}{{post.data.locator}}{% else %}{{post.data.iso}}{% endif %}-locator-map.gif" height="30"/>
     
