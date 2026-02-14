@@ -179,6 +179,11 @@ a:hover {
 .post {
   place-items: normal;
 }
+.postContent {
+  width: 860px;
+  max-width: 100%;
+  margin: 0 auto;
+}
 .postTitle {
   font-size: 4rem;
   color: #000;
@@ -187,4 +192,47 @@ a:hover {
 }
 .controls {
   margin: 3rem 0 2rem;
+}
+
+.postMedia {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 1.5rem;
+}
+
+.postMediaItem {
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.postFlagWrap {
+  flex: 0 0 auto;
+}
+
+.postFlag {
+  height: 240px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+}
+
+.postMapWrap {
+  width: 420px;
+}
+
+#mapBox > * {
+  width: 100%;
+  height: 100%;
+}
+
+.postMap {
+  width: 100%;
+  height: 100%;
 }

@@ -11,14 +11,20 @@ templateClass: tmpl-home
 {# This is the template for individual blog posts–it builds the front matter properties into the page #}
 
 <div class="wrapper post">
-  <div>
+  <div class="postContent">
     {# The post front matter includes the title property #}
     <h1 class="postTitle">{{title}}</h1>
     
     <br /> 
     
-    <img src="https://flagcdn.com/h240/{{iso | lower}}.png" height="200" />
-    <div id="country-map" style="width: 420px; height: 240px; display: inline-block;"></div>
+    <div class="postMedia">
+      <div class="postMediaItem postFlagWrap">
+        <img class="postFlag" src="https://flagcdn.com/h240/{{iso | lower}}.png" alt="Flag of {{ title }}" />
+      </div>
+      <div id="mapBox" class="postMediaItem postMapWrap">
+        <div id="country-map" class="postMap"></div>
+      </div>
+    </div>
     
     {# ADD P ELEMENT FROM TODO ON THE NEXT LINE #}
     
