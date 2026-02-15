@@ -82,7 +82,7 @@ templateClass: tmpl-home
           {% if dish.displayLabels and dish.displayLabels.length %}
           - Labels: {{ dish.displayLabels | join(', ') }}
           {% endif %}
-          {% if dish.url %}
+            {% if dish.url and ('glitch.me' not in (dish.url | lower)) %}
           - <a target="_blank" href="{{dish.url}}">Source</a>
           {% endif %}
       </li>
@@ -162,6 +162,40 @@ templateClass: tmpl-home
       labels.push("requires-adaptation")
     }
 
+    const dietaryBody = dietaryTags.length
+      ? dietaryTags.map(tag => `- [x] ${tag}`).join("\\n")
+      : "- [ ] vegetarian\\n- [ ] vegan\\n- [ ] fish\\n- [ ] shellfish\\n- [ ] gluten-free\\n- [ ] onion-free"
+
+    const adaptationBody = requiresAdaptation
+      ? "- [x] requires-adaptation"
+      : "- [ ] requires-adaptation"
+
+    const issueBody = [
+      "### Country page path",
+      countryPath,
+      "",
+      "### Recipe name",
+      recipeName || `${countryTitle} recipe`,
+      "",
+      "### Source URL",
+      sourceUrl || "",
+      "",
+      "### Course",
+      course,
+      "",
+      "### Dietary tags",
+      dietaryBody,
+      "",
+      "### Adaptation",
+      adaptationBody,
+      "",
+      "### Adaptation notes",
+      adaptationNotes || "",
+      "",
+      "### Why this recipe?",
+      `Candidate recipe for ${countryTitle}.`,
+    ].join("\\n")
+
     const params = new URLSearchParams()
     params.set("template", "recipe-suggestion.yml")
     params.set("labels", Array.from(new Set(labels)).join(","))
@@ -183,6 +217,7 @@ templateClass: tmpl-home
     if (sourceUrl) {
       params.set("source_url", sourceUrl)
     }
+    params.set("body", issueBody)
 
     window.open(`https://github.com/stretchyboy/our-food-challenge/issues/new?${params.toString()}`, "_blank", "noopener")
   })
