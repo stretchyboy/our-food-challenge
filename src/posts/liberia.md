@@ -9,7 +9,7 @@ tags:
 layout: layouts/post.njk
 ---
 
-## Key Traditional Liberian Drinks
+### Key Traditional Liberian Drinks
 
 *    Palm Wine: Freshly tapped from palm trees, this sweet, milky, and slightly alcoholic beverage is a staple at social gatherings.
 *    Ginger Beer (Liberian Ginger-Ade): A refreshing and spicy drink made from blended ginger, pineapple peelings, sugar, and sometimes yeast for fermentation.
