@@ -134,12 +134,15 @@ function extractSourceUrl(issue) {
 
 function classifyIssue(issue) {
   const labels = new Set(issue.labels.map((label) => (label.name || "").toLowerCase()));
+  const isOpen = issue.state === "open";
   const isClosedNotPlanned = issue.state === "closed" && issue.state_reason === "not_planned";
+  const isClosedDuplicate = issue.state === "closed" && issue.state_reason === "duplicate";
 
-  const isAccepted = labels.has("accepted");
-  const isRejected = labels.has("rejected");
+  
+  const isAccepted = labels.has("accepted") && isOpen;
+  const isRejected = labels.has("rejected") || isClosedDuplicate || isClosedNotPlanned;
 
-  if (isRejected || isClosedNotPlanned) {
+  if (isRejected) {
     return null;
   }
 

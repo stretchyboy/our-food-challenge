@@ -1,44 +1,4 @@
 {
-  "/posts/guinea-bissau/": {
-    "accepted": [],
-    "suggestions": [
-      {
-        "name": "Grilled Prawns",
-        "url": "https://spotcovery.com/how-to-make-grilled-prawns/",
-        "issueNumber": 19,
-        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/19",
-        "labels": [
-          "recipe-suggestion",
-          "main",
-          "shellfish"
-        ],
-        "displayLabels": [
-          "main",
-          "shellfish"
-        ],
-        "course": "main",
-        "dietaryTags": [
-          "shellfish"
-        ],
-        "requiresAdaptation": false,
-        "updatedAt": "2026-02-14T22:45:30Z"
-      },
-      {
-        "name": "posts/guinea-bissau/",
-        "url": null,
-        "issueNumber": 10,
-        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/10",
-        "labels": [
-          "recipe-suggestion"
-        ],
-        "displayLabels": [],
-        "course": "main",
-        "dietaryTags": [],
-        "requiresAdaptation": false,
-        "updatedAt": "2026-02-14T22:18:59Z"
-      }
-    ]
-  },
   "/posts/liberia/": {
     "accepted": [
       {
@@ -60,6 +20,57 @@
       }
     ],
     "suggestions": [
+      {
+        "name": "Bitter Leaf",
+        "url": null,
+        "issueNumber": 22,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/22",
+        "labels": [
+          "recipe-suggestion",
+          "main"
+        ],
+        "displayLabels": [
+          "main"
+        ],
+        "course": "main",
+        "dietaryTags": [],
+        "requiresAdaptation": false,
+        "updatedAt": "2026-02-16T22:18:59Z"
+      },
+      {
+        "name": "Acheke",
+        "url": "https://en.wikipedia.org/wiki/Acheke",
+        "issueNumber": 21,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/21",
+        "labels": [
+          "recipe-suggestion",
+          "main"
+        ],
+        "displayLabels": [
+          "main"
+        ],
+        "course": "main",
+        "dietaryTags": [],
+        "requiresAdaptation": false,
+        "updatedAt": "2026-02-16T22:09:21Z"
+      },
+      {
+        "name": "Fufu & Soup",
+        "url": "https://www.youtube.com/watch?v=Q3HnaK7q0pQ",
+        "issueNumber": 20,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/20",
+        "labels": [
+          "recipe-suggestion",
+          "main"
+        ],
+        "displayLabels": [
+          "main"
+        ],
+        "course": "main",
+        "dietaryTags": [],
+        "requiresAdaptation": false,
+        "updatedAt": "2026-02-16T22:06:29Z"
+      },
       {
         "name": "Palaver sauce",
         "url": "https://en.wikipedia.org/wiki/Palaver_sauce",
@@ -99,6 +110,46 @@
         ],
         "requiresAdaptation": true,
         "updatedAt": "2026-02-14T22:19:01Z"
+      }
+    ]
+  },
+  "/posts/guinea-bissau/": {
+    "accepted": [],
+    "suggestions": [
+      {
+        "name": "Grilled Prawns",
+        "url": "https://spotcovery.com/how-to-make-grilled-prawns/",
+        "issueNumber": 19,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/19",
+        "labels": [
+          "recipe-suggestion",
+          "main",
+          "shellfish"
+        ],
+        "displayLabels": [
+          "main",
+          "shellfish"
+        ],
+        "course": "main",
+        "dietaryTags": [
+          "shellfish"
+        ],
+        "requiresAdaptation": false,
+        "updatedAt": "2026-02-14T22:45:30Z"
+      },
+      {
+        "name": "posts/guinea-bissau/",
+        "url": null,
+        "issueNumber": 10,
+        "issueUrl": "https://github.com/stretchyboy/our-food-challenge/issues/10",
+        "labels": [
+          "recipe-suggestion"
+        ],
+        "displayLabels": [],
+        "course": "main",
+        "dietaryTags": [],
+        "requiresAdaptation": false,
+        "updatedAt": "2026-02-14T22:18:59Z"
       }
     ]
   },

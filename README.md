@@ -54,6 +54,29 @@ If `mapFocus` exists, maps focus on coordinates. Otherwise they focus by region 
 - Sync issue data: `npm run sync:issue-foods`
 - Production build: `npm run build`
 
+### GitHub token setup
+
+The sync scripts read the token from environment variables (in this order):
+
+1. `GITHUB_TOKEN`
+2. `GH_TOKEN`
+
+Set one of these **in the environment where you run `npm run build`**.
+
+Examples:
+
+- One shell session:
+  - `export GITHUB_TOKEN=your_token_here`
+  - `npm run build`
+- Persistent local setup:
+  - add `export GITHUB_TOKEN=your_token_here` to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.)
+- Hosted build (Cloudflare Pages / CI):
+  - add `GITHUB_TOKEN` as an environment variable/secret in that platform's project settings
+
+Optional override:
+
+- `ISSUE_SYNC_REPO=owner/repo` lets sync scripts target a different repository.
+
 ### Issue labels for recipe triage
 
 - Required workflow label: `recipe-suggestion`
