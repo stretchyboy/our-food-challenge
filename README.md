@@ -114,6 +114,21 @@ Notes:
 - Output directory: `build`
 - Node: `20+`
 
+### Auto deploy on issue changes
+
+This repo includes GitHub Actions workflow `.github/workflows/deploy-on-issue-events.yml`.
+
+- Trigger: GitHub `issues` events (opened, edited, reopened, closed, labeled, unlabeled, and related issue state changes).
+- Action: sends `POST` to the Cloudflare Pages deploy hook URL.
+
+Required repo secret:
+
+- `CLOUDFLARE_PAGES_DEPLOY_HOOK_URL` = your Cloudflare deploy hook URL.
+
+Set it in GitHub:
+
+- Repository -> Settings -> Secrets and variables -> Actions -> New repository secret
+
 ## SEO setup
 
 - Canonical/base URL is set in `src/seo.json` as `https://our-food-challenge.pages.dev`

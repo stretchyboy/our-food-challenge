@@ -1,0 +1,39 @@
+name: Deploy on issue changes
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+      - closed
+      - labeled
+      - unlabeled
+      - deleted
+      - transferred
+      - pinned
+      - unpinned
+      - milestoned
+      - demilestoned
+      - assigned
+      - unassigned
+      - locked
+      - unlocked
+
+permissions:
+  contents: read
+
+jobs:
+  trigger-cloudflare-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy hook
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "Missing secret: CLOUDFLARE_PAGES_DEPLOY_HOOK_URL"
+            exit 1
+          fi
+
+          curl -fsS -X POST "$DEPLOY_HOOK_URL"
