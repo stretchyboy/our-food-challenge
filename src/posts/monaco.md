@@ -1,5 +1,5 @@
 ---
-title: Maldives
+title: Monaco
 iso: MC
 description: What can you build on top of this?
 date: 
